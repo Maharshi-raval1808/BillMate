@@ -192,7 +192,25 @@ export default function Home(props) {
 
       {/* Carousel */}
       <div className="mt-10 sm:mt-16 w-full px-2 sm:px-4 md:px-0">
-        <Carousel />
+        <Carousel
+          slides={[
+            {
+              image: `${process.env.PUBLIC_URL}/Carousel_1.jpg`,
+              title: "Split Bills Easily",
+              description: "Add expenses, split with friends, and keep track of who owes what."
+            },
+            {
+              image: `${process.env.PUBLIC_URL}/Carousel_2.jpg`,
+              title: "Track Your Spending",
+              description: "Visualize your expenses and stay on top of your budget."
+            },
+            {
+              image: `${process.env.PUBLIC_URL}/Carousel_3.png`,
+              title: "Settle Up Instantly",
+              description: "Pay back friends and settle balances with just a tap."
+            }
+          ]}
+        />
       </div>
     </div>
   );
