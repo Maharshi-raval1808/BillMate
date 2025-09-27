@@ -61,27 +61,31 @@ export default function Carousel() {
       {slides.map((slide, index) => (
         <div
           key={index}
-          className={`flex flex-col md:flex-row items-center gap-6 p-6 rounded-xl shadow-lg absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out
-            ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}
-            ${slide.bgColor}`}
+          className={`flex flex-col md:flex-row items-center gap-6 p-0 md:p-6 rounded-xl shadow-lg absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ease-in-out
+            ${index === current ? "opacity-100 z-10" : "opacity-0 z-0"}`}
+          style={{ background: 'linear-gradient(90deg, #e0e7ff 0%, #f0fdf4 100%)' }}
         >
-          <img
-            src={slide.image}
-            alt={slide.title}
-            className="w-full md:w-1/2 h-full object-cover rounded-xl shadow-md"
-          />
+          <div className="relative w-full md:w-1/2 h-full flex items-center justify-center">
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover rounded-xl shadow-md scale-105"
+              style={{ filter: 'brightness(0.95) saturate(1.1)' }}
+            />
+            <div className="absolute inset-0 rounded-xl" style={{background: 'linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.05) 100%)'}}></div>
+          </div>
           <div className="flex flex-col justify-center gap-4 md:w-1/2 text-center md:text-left px-2 md:px-6">
-            <h2 className="text-2xl md:text-3xl font-bold text-gray-800 drop-shadow-sm">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-blue-700 drop-shadow-sm mb-2 animate-fadein">
               {slide.title}
             </h2>
-            <p className="text-gray-700 text-sm md:text-base leading-relaxed">
+            <p className="text-gray-700 text-base md:text-lg leading-relaxed animate-fadein">
               {slide.description}
             </p>
           </div>
         </div>
       ))}
 
-      {/* Invisible click zones */}
+      {/* Invisible click zones for navigation */}
       <div
         className="absolute top-0 left-0 h-full w-1/2 cursor-pointer z-20"
         onClick={prevSlide}
@@ -90,18 +94,6 @@ export default function Carousel() {
         className="absolute top-0 right-0 h-full w-1/2 cursor-pointer z-20"
         onClick={nextSlide}
       />
-
-      {/* Dot Indicators */}
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2 z-20">
-        {slides.map((_, index) => (
-          <div
-            key={index}
-            onClick={() => goToSlide(index)}
-            className={`w-3 h-3 rounded-full cursor-pointer transition-all duration-300
-              ${index === current ? "bg-gray-800 scale-125" : "bg-gray-400 scale-100"}`}
-          ></div>
-        ))}
-      </div>
     </div>
   );
 }

@@ -1,56 +1,51 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 
-export default function Navbar({ isLoggedIn, handleLoginLogout }) {
+export default function Navbar({ isLoggedIn, handleLoginLogout, handleLogoutWithModal }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   const menuItems = [
-    { path: "/", label: "Home" },
-    { path: "/friends", label: "Friends" },
-    { path: "/expenses", label: "Expenses" },
-    { path: "/expense-history", label: "Expense History" },
-    // { path: "/summary", label: "Summary" },
-    { path: "/balances", label: "Balances" },
+    { name: "Home", path: "/" },
+    { name: "Friends", path: "/friends" },
+    { name: "Expenses", path: "/expenses" },
+    { name: "Expense History", path: "/expense-history" },
+    { name: "Summary", path: "/summary" },
+    { name: "Balances", path: "/balances" },
   ];
 
-  const onLoginLogout = () => {
-    handleLoginLogout();
-    if (isLoggedIn) {
-      navigate("/");
-    }
-  };
-
   return (
-    <nav className="w-full bg-white shadow-md px-6 py-3 flex justify-between items-center">
+    <nav className="sticky top-0 w-full bg-white/90 backdrop-blur shadow-lg px-8 py-4 flex justify-between items-center z-50 border-b border-gray-200">
       {/* Logo */}
       <div className="flex flex-col">
-        <span className="text-2xl font-bold text-blue-600">BillMate</span>
-        <span className="text-sm text-gray-600">Track, Split, Enjoy.</span>
+        <span className="text-3xl font-extrabold text-indigo-600 tracking-tight">BillMate</span>
+        <span className="text-sm text-gray-500">Track, Split, Enjoy.</span>
       </div>
 
-      <div className="flex items-center gap-6">
+      {/* Right Section */}
+      <div className="flex items-center gap-8">
         {isLoggedIn && (
           <div className="relative">
             <button
               onClick={() => setMenuOpen(!menuOpen)}
-              className="px-4 py-2 bg-gray-100 rounded-lg shadow hover:bg-gray-200 transition"
+              className="bg-gray-100 text-gray-700 px-4 py-2 rounded-xl shadow hover:bg-gray-200 transition font-semibold"
             >
               Menu
             </button>
+
             {menuOpen && (
-              <div className="absolute right-0 mt-2 w-48 bg-white border rounded-lg shadow-lg z-50">
+              <div className="absolute right-0 mt-2 w-52 bg-white border rounded-xl shadow-2xl z-50">
                 {menuItems
-                  .filter((item) => item.path !== location.pathname) 
+                  .filter((item) => item.path !== location.pathname)
                   .map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}
-                      className="block px-4 py-2 hover:bg-gray-100"
+                      className="block px-5 py-3 hover:bg-indigo-50 text-gray-700 rounded-xl"
                       onClick={() => setMenuOpen(false)}
                     >
-                      {item.label}
+                      {item.name}
                     </Link>
                   ))}
               </div>
@@ -58,10 +53,16 @@ export default function Navbar({ isLoggedIn, handleLoginLogout }) {
           </div>
         )}
 
-        {/* Login / Logout */}
+        {/* Login / Logout Button */}
         <button
-          onClick={onLoginLogout}
-          className="px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition text-lg font-semibold"
+          onClick={() => {
+            if (isLoggedIn) {
+              handleLogoutWithModal();
+            } else {
+              handleLoginLogout();
+            }
+          }}
+          className="custom-button text-lg"
         >
           {isLoggedIn ? "Logout" : "Login"}
         </button>
