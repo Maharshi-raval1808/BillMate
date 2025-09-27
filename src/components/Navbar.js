@@ -16,15 +16,15 @@ export default function Navbar({ isLoggedIn, handleLoginLogout, handleLogoutWith
   ];
 
   return (
-    <nav className="sticky top-0 w-full bg-white/90 backdrop-blur shadow-lg px-8 py-4 flex justify-between items-center z-50 border-b border-gray-200">
+  <nav className="sticky top-0 w-full bg-white/90 backdrop-blur shadow-lg px-4 sm:px-8 py-4 flex flex-row justify-between items-center z-50 border-b border-gray-200">
       {/* Logo */}
-      <div className="flex flex-col">
+  <div className="flex flex-col min-w-[110px] sm:min-w-[140px]">
         <span className="text-3xl font-extrabold text-indigo-600 tracking-tight">BillMate</span>
         <span className="text-sm text-gray-500">Track, Split, Enjoy.</span>
       </div>
 
       {/* Right Section */}
-      <div className="flex items-center gap-8">
+  <div className="flex items-center gap-4 sm:gap-8">
         {isLoggedIn && (
           <div className="relative">
             <button
