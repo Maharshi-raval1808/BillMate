@@ -18,16 +18,16 @@ export default function Friends() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+  <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
       {/* Navbar */}
       {/* <Navbar current="Friends" /> */}
 
       {/* Page Content */}
-      <div className="flex flex-col items-center justify-start p-4 sm:p-6 mt-6 w-full">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-green-600 text-center">👥 Friends</h1>
+  <div className="flex flex-col items-center justify-start p-2 sm:p-6 mt-4 sm:mt-6 w-full">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-green-600 text-center">👥 Friends</h1>
 
         {/* Add Friend Card */}
-        <div className="w-full max-w-lg bg-white p-4 sm:p-5 rounded-xl shadow-lg flex flex-col gap-4">
+  <div className="w-full max-w-sm sm:max-w-lg bg-white p-3 sm:p-5 rounded-xl shadow-lg flex flex-col gap-3 sm:gap-4">
           <h2 className="text-lg font-semibold text-center mb-2">Add a Friend</h2>
           <div className="flex flex-col sm:flex-row gap-3">
             <input
@@ -48,7 +48,7 @@ export default function Friends() {
         </div>
 
         {/* Friends List */}
-        <div className="w-full max-w-md mt-6">
+  <div className="w-full max-w-xs sm:max-w-md mt-4 sm:mt-6">
           {friends.length === 0 ? (
             <p className="text-gray-500 text-center mt-6">No friends added yet.</p>
           ) : (

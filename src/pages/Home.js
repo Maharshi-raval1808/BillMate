@@ -39,11 +39,11 @@ export default function Home(props) {
   } = props;
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+  <div className="min-h-screen flex flex-col bg-gray-50">
       {/* Login Modal */}
       {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-4 relative">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 px-2">
+          <div className="bg-white p-4 sm:p-8 rounded-xl shadow-lg w-full max-w-sm sm:max-w-md space-y-4 relative">
             <button
               className="absolute top-2 right-2 w-10 h-10 flex items-center justify-center text-3xl text-gray-700 hover:text-red-500 font-bold focus:outline-none rounded-full bg-white shadow"
               onClick={() => setShowLoginModal(false)}
@@ -90,34 +90,33 @@ export default function Home(props) {
       )}
 
       {/* Top Section: Logo + Description */}
-      <div className="flex flex-col md:flex-row items-center justify-center p-8 gap-12 w-full max-w-6xl mx-auto mt-8">
-        <div className="flex flex-col items-center justify-center h-full">
+  <div className="flex flex-col md:flex-row items-center justify-center p-4 sm:p-8 gap-6 sm:gap-12 w-full max-w-6xl mx-auto mt-6 sm:mt-8">
+        <div className="flex flex-col items-center justify-center h-full w-full max-w-xs sm:max-w-sm md:max-w-md">
           <img
             src={`${process.env.PUBLIC_URL}/BillMate_Logo.png`}
             alt="BillMate Logo"
-            className="rounded-lg shadow-lg"
-            style={{ height: '100%', maxHeight: '340px', width: 'auto', minHeight: '180px' }}
+            className="rounded-lg shadow-lg w-full h-auto max-h-48 sm:max-h-72 object-contain"
           />
         </div>
-        <div className="flex flex-col gap-6 max-w-lg text-center md:text-left justify-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-blue-600 drop-shadow-md">
+        <div className="flex flex-col gap-4 sm:gap-6 max-w-lg w-full text-center md:text-left justify-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-600 drop-shadow-md">
             BillMate
           </h1>
-          <p className="text-lg md:text-xl text-gray-700 leading-relaxed">
+          <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
             Track your expenses, split bills with friends, and enjoy a seamless experience
             managing your finances. Keep everything in one place and never miss a payment!
           </p>
           {!googleUser ? (
             <button
               onClick={() => setShowRegisterModal(true)}
-              className="px-8 py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition text-lg font-semibold w-fit mx-auto md:mx-0"
+              className="px-6 py-2 sm:px-8 sm:py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition text-base sm:text-lg font-semibold w-full sm:w-fit mx-auto md:mx-0"
             >
               Get Started
             </button>
           ) : (
-            <div className="mt-6 p-4 bg-gray-100 rounded-lg shadow text-left flex items-center gap-4">
+            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-100 rounded-lg shadow text-left flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
               {googleUser.picture && (
-                <img src={googleUser.picture} alt="Google profile" className="w-16 h-16 rounded-full border" />
+                <img src={googleUser.picture} alt="Google profile" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border" />
               )}
               <div>
                 <div className="font-bold text-lg">{googleUser.name || googleUser.given_name || googleUser.email}</div>
@@ -130,8 +129,8 @@ export default function Home(props) {
 
       {/* Register Modal */}
       {showRegisterModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md space-y-4 relative">
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50 px-2">
+          <div className="bg-white p-4 sm:p-8 rounded-xl shadow-lg w-full max-w-sm sm:max-w-md space-y-4 relative">
             <button
               className="absolute top-2 right-2 w-10 h-10 flex items-center justify-center text-3xl text-gray-700 hover:text-red-500 font-bold focus:outline-none rounded-full bg-white shadow"
               onClick={() => setShowRegisterModal(false)}
@@ -192,7 +191,7 @@ export default function Home(props) {
       )}
 
       {/* Carousel */}
-      <div className="mt-16 w-full px-4 md:px-0">
+      <div className="mt-10 sm:mt-16 w-full px-2 sm:px-4 md:px-0">
         <Carousel />
       </div>
     </div>

@@ -29,11 +29,11 @@ export default function ExpenseHistory() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+  <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
       {/* <Navbar current="Expense History" /> */}
 
-      <div className="p-6 flex flex-col items-center gap-4 mt-6 w-full max-w-3xl">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-yellow-600">📜 Expense History</h1>
+  <div className="p-2 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full max-w-xl sm:max-w-3xl">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-yellow-600">📜 Expense History</h1>
 
         {expenses.length === 0 ? (
           <p className="text-gray-500">No transactions yet.</p>

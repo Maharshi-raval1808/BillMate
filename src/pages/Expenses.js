@@ -7,11 +7,11 @@ export default function Expenses() {
   const [showForm, setShowForm] = useState(false);
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+  <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
       {/* <Navbar current="Expenses" /> */}
 
-      <div className="p-6 flex flex-col items-center gap-4 mt-6">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-blue-600">💵 Expenses</h1>
+  <div className="p-2 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 mt-4 sm:mt-6">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-blue-600">💵 Expenses</h1>
         <button
           onClick={() => setShowForm(!showForm)}
           className="mb-4 px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition"

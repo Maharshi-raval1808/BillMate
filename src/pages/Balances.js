@@ -33,10 +33,10 @@ export default function Balances() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
+  <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
       {/* <Navbar current="Balances" /> */}
-      <div className="p-6 flex flex-col items-center gap-4 mt-6 w-full max-w-2xl">
-        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-pink-600">💰 View Balances</h1>
+  <div className="p-2 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full max-w-md sm:max-w-2xl">
+  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-pink-600">💰 View Balances</h1>
         {transactions.length === 0 ? (
           <p className="text-gray-500">All settled up 🎉</p>
         ) : (
