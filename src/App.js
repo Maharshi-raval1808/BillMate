@@ -146,6 +146,18 @@ function App() {
       payload = JSON.parse(atob(token.split('.')[1]));
     } catch (e) {}
     localStorage.setItem('jwtToken', token);
+    // Store all Google users in localStorage array
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    // Only add if not already present
+    if (!users.some(u => u.email === payload.email)) {
+      users.push({
+        username: payload.name || payload.given_name || payload.email,
+        email: payload.email,
+        picture: payload.picture || '',
+        google: true
+      });
+      localStorage.setItem('users', JSON.stringify(users));
+    }
     localStorage.setItem('googleUser', JSON.stringify(payload));
     setIsLoggedIn(true);
     setShowLoginModal(false);
