@@ -1,0 +1,52 @@
+import React, { useContext } from "react";
+import { ExpenseContext } from "../context/ExpenseContext";
+
+export default function Balances() {
+  const { friends, expenses } = useContext(ExpenseContext);
+  const participants = ["You", ...friends];
+
+  const balances = {};
+  participants.forEach(p => (balances[p] = 0));
+  expenses.forEach(({ amount, paidBy, splitBetween }) => {
+    const share = amount / splitBetween.length;
+    splitBetween.forEach(person => {
+      if (person === paidBy) balances[person] += amount - share;
+      else balances[person] -= share;
+    });
+  });
+
+  const debtors = [], creditors = [];
+  Object.entries(balances).forEach(([person, balance]) => {
+    if (balance < 0) debtors.push({ person, amount: Math.abs(balance) });
+    else if (balance > 0) creditors.push({ person, amount: balance });
+  });
+
+  const transactions = [];
+  let i = 0, j = 0;
+  while (i < debtors.length && j < creditors.length) {
+    const settledAmount = Math.min(debtors[i].amount, creditors[j].amount);
+    transactions.push(`${debtors[i].person} pays ${creditors[j].person} ₹${settledAmount.toFixed(2)}`);
+    debtors[i].amount -= settledAmount;
+    creditors[j].amount -= settledAmount;
+    if (debtors[i].amount === 0) i++;
+    if (creditors[j].amount === 0) j++;
+  }
+
+  return (
+    <div className="min-h-screen flex flex-col bg-gray-50">
+      {/* <Navbar current="Balances" /> */}
+      <div className="p-6 flex flex-col items-center gap-4 mt-6 w-full max-w-2xl">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-6 text-pink-600">💰 View Balances</h1>
+        {transactions.length === 0 ? (
+          <p className="text-gray-500">All settled up 🎉</p>
+        ) : (
+          <ul className="w-full space-y-2">
+            {transactions.map((t, i) => (
+              <li key={i} className="border p-2 rounded bg-white shadow">{t}</li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  );
+}
