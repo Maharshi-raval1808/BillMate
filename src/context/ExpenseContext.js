@@ -5,6 +5,16 @@ export const ExpenseContext = createContext();
 export const ExpenseProvider = ({ children }) => {
   const [friends, setFriends] = useState([]);
   const [expenses, setExpenses] = useState([]);
+  const [groups, setGroups] = useState([]);
+  // Add a group
+  const addGroup = (groupName, members) => {
+    setGroups((prev) => [...prev, { name: groupName, members }]);
+  };
+
+  // Remove a group
+  const removeGroup = (groupName) => {
+    setGroups((prev) => prev.filter((g) => g.name !== groupName));
+  };
 
   // Add a friend
   const addFriend = (friend) => {
@@ -56,6 +66,9 @@ export const ExpenseProvider = ({ children }) => {
         addExpense,
         removeExpense,
         updateExpense,
+        groups,
+        addGroup,
+        removeGroup,
       }}
     >
       {children}

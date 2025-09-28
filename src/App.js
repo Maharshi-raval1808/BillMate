@@ -1,3 +1,4 @@
+import Balances from "./pages/Balances";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ExpenseProvider } from "./context/ExpenseContext";
@@ -7,8 +8,6 @@ import Home from "./pages/Home";
 import Friends from "./pages/Friends";
 import Expenses from "./pages/Expenses";
 import ExpenseHistory from "./pages/ExpenseHistory";
-import Summary from "./pages/Summary";
-import Balances from "./pages/Balances";
 
 function App() {
   // Logout confirmation modal state
@@ -104,7 +103,7 @@ function App() {
   const handleRegister = () => {
     const users = JSON.parse(localStorage.getItem("users") || "[]");
     // Email format validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;  
     if (!emailRegex.test(regEmail)) {
       setRegError("Please enter a valid email address");
       return;
@@ -252,7 +251,6 @@ function App() {
         <Route path="/friends" element={<Friends />} />
         <Route path="/expenses" element={<Expenses />} />
         <Route path="/expense-history" element={<ExpenseHistory />} />
-        <Route path="/summary" element={<Summary />} />
         <Route path="/balances" element={<Balances />} />
       </Routes>
     </ExpenseProvider>

@@ -11,7 +11,6 @@ export default function Navbar({ isLoggedIn, handleLoginLogout, handleLogoutWith
     { name: "Friends", path: "/friends" },
     { name: "Expenses", path: "/expenses" },
     { name: "Expense History", path: "/expense-history" },
-    { name: "Summary", path: "/summary" },
     { name: "Balances", path: "/balances" },
   ];
 

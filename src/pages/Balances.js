@@ -3,8 +3,15 @@ import { ExpenseContext } from "../context/ExpenseContext";
 
 export default function Balances() {
   const { friends, expenses } = useContext(ExpenseContext);
-  const participants = ["You", ...friends];
+  // Build participant list from friends and all expense participants
+  const participantsSet = new Set(["You", ...friends]);
+  expenses.forEach(exp => {
+    exp.splitBetween.forEach(p => participantsSet.add(p));
+    participantsSet.add(exp.paidBy);
+  });
+  const participants = Array.from(participantsSet);
 
+  // Calculate balances
   const balances = {};
   participants.forEach(p => (balances[p] = 0));
   expenses.forEach(({ amount, paidBy, splitBetween }) => {
@@ -15,12 +22,14 @@ export default function Balances() {
     });
   });
 
+  // Separate creditors and debtors
   const debtors = [], creditors = [];
   Object.entries(balances).forEach(([person, balance]) => {
     if (balance < 0) debtors.push({ person, amount: Math.abs(balance) });
     else if (balance > 0) creditors.push({ person, amount: balance });
   });
 
+  // Generate transactions
   const transactions = [];
   let i = 0, j = 0;
   while (i < debtors.length && j < creditors.length) {
@@ -33,10 +42,9 @@ export default function Balances() {
   }
 
   return (
-  <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
-      {/* <Navbar current="Balances" /> */}
-  <div className="p-2 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full max-w-md sm:max-w-2xl">
-  <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-pink-600">💰 View Balances</h1>
+    <div className="min-h-screen flex flex-col bg-gray-50 px-2 sm:px-0">
+      <div className="p-2 sm:p-6 flex flex-col items-center gap-3 sm:gap-4 mt-4 sm:mt-6 w-full max-w-md sm:max-w-2xl">
+        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4 sm:mb-6 text-indigo-600">💰 Balances</h1>
         {transactions.length === 0 ? (
           <p className="text-gray-500">All settled up 🎉</p>
         ) : (

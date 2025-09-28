@@ -91,41 +91,45 @@ export default function Home(props) {
 
       {/* Top Section: Logo + Description */}
   <div className="flex flex-col md:flex-row items-center justify-center p-4 sm:p-8 gap-6 sm:gap-12 w-full max-w-6xl mx-auto mt-6 sm:mt-8">
-        <div className="flex flex-col items-center justify-center h-full w-full max-w-xs sm:max-w-sm md:max-w-md">
-          <img
-            src={`${process.env.PUBLIC_URL}/BillMate_Logo.png`}
-            alt="BillMate Logo"
-            className="rounded-lg shadow-lg w-full h-auto max-h-48 sm:max-h-72 object-contain"
-          />
-        </div>
-        <div className="flex flex-col gap-4 sm:gap-6 max-w-lg w-full text-center md:text-left justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-600 drop-shadow-md">
-            BillMate
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed">
-            Track your expenses, split bills with friends, and enjoy a seamless experience
-            managing your finances. Keep everything in one place and never miss a payment!
-          </p>
-          {!googleUser ? (
-            <button
-              onClick={() => setShowRegisterModal(true)}
-              className="px-6 py-2 sm:px-8 sm:py-3 bg-blue-500 text-white rounded-lg shadow-lg hover:bg-blue-600 transition text-base sm:text-lg font-semibold w-full sm:w-fit mx-auto md:mx-0"
-            >
-              Get Started
-            </button>
-          ) : (
-            <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gray-100 rounded-lg shadow text-left flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full">
-              {googleUser.picture && (
-                <img src={googleUser.picture} alt="Google profile" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border" />
-              )}
-              <div>
-                <div className="font-bold text-lg">{googleUser.name || googleUser.given_name || googleUser.email}</div>
-                <div className="text-gray-700">{googleUser.email}</div>
-              </div>
-            </div>
-          )}
-        </div>
+    <div className="flex flex-col items-center justify-center h-full w-full max-w-xs sm:max-w-sm md:max-w-md">
+      <div className="relative w-full flex items-center justify-center">
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-200 via-indigo-100 to-green-100 opacity-70 blur-lg z-0"></div>
+        <img
+          src={`${process.env.PUBLIC_URL}/BillMate_Logo.png`}
+          alt="BillMate Logo"
+          className="rounded-2xl shadow-2xl border-4 border-blue-400 w-full h-auto max-h-48 sm:max-h-72 object-contain animate-fadein z-10"
+          style={{ filter: 'drop-shadow(0 8px 24px rgba(59,130,246,0.25)) brightness(1.08)' }}
+        />
       </div>
+    </div>
+    <div className="flex flex-col gap-4 sm:gap-6 max-w-lg w-full text-center md:text-left justify-center animate-slideup">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-blue-600 drop-shadow-xl animate-gradient-text bg-gradient-to-r from-blue-500 via-indigo-400 to-green-400 bg-clip-text text-transparent border-b-4 border-blue-400 pb-2">
+        BillMate
+      </h1>
+      <p className="text-base sm:text-lg md:text-xl text-gray-700 leading-relaxed animate-fadein shadow-lg rounded-xl px-3 py-3 bg-gradient-to-br from-blue-100 via-indigo-50 to-green-50 border-2 border-blue-300">
+        Track your expenses, split bills with friends, and enjoy a seamless experience
+        managing your finances. Keep everything in one place and never miss a payment!
+      </p>
+      {!googleUser ? (
+        <button
+          onClick={() => setShowRegisterModal(true)}
+          className="px-6 py-2 sm:px-8 sm:py-3 bg-gradient-to-r from-blue-500 via-indigo-400 to-green-400 text-white rounded-xl shadow-xl hover:scale-105 hover:shadow-2xl transition text-base sm:text-lg font-semibold w-full sm:w-fit mx-auto md:mx-0 animate-bounce"
+        >
+          Get Started
+        </button>
+      ) : (
+        <div className="mt-4 sm:mt-6 p-3 sm:p-4 bg-gradient-to-r from-gray-100 via-blue-50 to-green-50 rounded-xl shadow-lg text-left flex flex-col sm:flex-row items-center gap-3 sm:gap-4 w-full animate-fadein">
+          {googleUser.picture && (
+            <img src={googleUser.picture} alt="Google profile" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border shadow-md" />
+          )}
+          <div>
+            <div className="font-bold text-lg text-blue-700">{googleUser.name || googleUser.given_name || googleUser.email}</div>
+            <div className="text-gray-700">{googleUser.email}</div>
+          </div>
+        </div>
+      )}
+    </div>
+  </div>
 
       {/* Register Modal */}
       {showRegisterModal && (
@@ -190,27 +194,29 @@ export default function Home(props) {
         </div>
       )}
 
-      {/* Carousel */}
-      <div className="mt-10 sm:mt-16 w-full px-2 sm:px-4 md:px-0">
-        <Carousel
-          slides={[
-            {
-              image: `${process.env.PUBLIC_URL}/Carousel_1.jpg`,
-              title: "Split Bills Easily",
-              description: "Add expenses, split with friends, and keep track of who owes what."
-            },
-            {
-              image: `${process.env.PUBLIC_URL}/Carousel_2.jpg`,
-              title: "Track Your Spending",
-              description: "Visualize your expenses and stay on top of your budget."
-            },
-            {
-              image: `${process.env.PUBLIC_URL}/Carousel_3.png`,
-              title: "Settle Up Instantly",
-              description: "Pay back friends and settle balances with just a tap."
-            }
-          ]}
-        />
+      {/* Carousel with effect wrapper */}
+      <div className="mt-10 sm:mt-16 w-full px-2 sm:px-4 md:px-0 animate-fadein">
+        <div className="rounded-2xl shadow-2xl bg-gradient-to-br from-blue-200 via-indigo-100 to-green-100 border-4 border-blue-300 p-2 sm:p-4 md:p-6">
+          <Carousel
+            slides={[
+              {
+                image: `${process.env.PUBLIC_URL}/Carousel_1.jpg`,
+                title: "Split Bills Easily",
+                description: "Add expenses, split with friends, and keep track of who owes what."
+              },
+              {
+                image: `${process.env.PUBLIC_URL}/Carousel_2.jpg`,
+                title: "Track Your Spending",
+                description: "Visualize your expenses and stay on top of your budget."
+              },
+              {
+                image: `${process.env.PUBLIC_URL}/Carousel_3.png`,
+                title: "Settle Up Instantly",
+                description: "Pay back friends and settle balances with just a tap."
+              }
+            ]}
+          />
+        </div>
       </div>
     </div>
   );
